@@ -1,4 +1,4 @@
-1373574346
+1373574430
 About page	/home/fgka/dev/rails_projects/sample_app/spec/requests/static_pages_spec.rb	describe "About page" do
 AddIndexToUsersEmail	/home/fgka/dev/rails_projects/sample_app/db/migrate/20130628203746_add_index_to_users_email.rb	class AddIndexToUsersEmail 
 AddPasswordDigestToUsers	/home/fgka/dev/rails_projects/sample_app/db/migrate/20130628204630_add_password_digest_to_users.rb	class AddPasswordDigestToUsers 

@@ -1,9 +1,42 @@
 --- 
 cursor_positions: 
-  - :path: app/assets/stylesheets/custom.css.scss
-    :cursor_offset: 1519
-    :timestamp: 2013-07-11 16:31:13 -03:00
   - :path: app/controllers/application_controller.rb
     :cursor_offset: 0
     :timestamp: 2013-06-27 18:46:37 -03:00
+  - :path: app/helpers/users_helper.rb
+    :cursor_offset: 315
+    :timestamp: 2013-07-11 16:59:44 -03:00
+  - :path: app/views/users/new.html.erb
+    :cursor_offset: 176
+    :timestamp: 2013-07-11 17:18:33 -03:00
+  - :path: app/views/shared/_error_messages.html.erb
+    :cursor_offset: 307
+    :timestamp: 2013-07-11 17:19:43 -03:00
+  - :path: config/environments/test.rb
+    :cursor_offset: 1687
+    :timestamp: 2013-07-11 16:52:42 -03:00
+  - :path: spec/factories.rb
+    :cursor_offset: 172
+    :timestamp: 2013-07-11 16:48:34 -03:00
+  - :path: Gemfile
+    :cursor_offset: 789
+    :timestamp: 2013-07-11 16:45:52 -03:00
+  - :path: spec/requests/user_pages_spec.rb
+    :cursor_offset: 768
+    :timestamp: 2013-07-11 17:09:27 -03:00
+  - :path: app/controllers/users_controller.rb
+    :cursor_offset: 206
+    :timestamp: 2013-07-11 17:25:01 -03:00
+  - :path: app/views/users/show.html.erb
+    :cursor_offset: 199
+    :timestamp: 2013-07-11 17:26:26 -03:00
+  - :path: config/routes.rb
+    :cursor_offset: 60
+    :timestamp: 2013-07-11 17:26:26 -03:00
+  - :path: app/views/layouts/application.html.erb
+    :cursor_offset: 545
+    :timestamp: 2013-07-11 17:26:26 -03:00
+  - :path: app/assets/stylesheets/custom.css.scss
+    :cursor_offset: 2189
+    :timestamp: 2013-07-11 17:26:26 -03:00
 files_to_retain: 0
