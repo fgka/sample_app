@@ -1,0 +1,59 @@
+1373574346
+About page	/home/fgka/dev/rails_projects/sample_app/spec/requests/static_pages_spec.rb	describe "About page" do
+AddIndexToUsersEmail	/home/fgka/dev/rails_projects/sample_app/db/migrate/20130628203746_add_index_to_users_email.rb	class AddIndexToUsersEmail 
+AddPasswordDigestToUsers	/home/fgka/dev/rails_projects/sample_app/db/migrate/20130628204630_add_password_digest_to_users.rb	class AddPasswordDigestToUsers 
+Application	/home/fgka/dev/rails_projects/sample_app/config/application.rb	  class Application 
+ApplicationController	/home/fgka/dev/rails_projects/sample_app/app/controllers/application_controller.rb	class ApplicationController 
+ApplicationHelper	/home/fgka/dev/rails_projects/sample_app/app/helpers/application_helper.rb	module ApplicationHelper
+Contact page	/home/fgka/dev/rails_projects/sample_app/spec/requests/static_pages_spec.rb	describe "Contact page" do
+CreateUsers	/home/fgka/dev/rails_projects/sample_app/db/migrate/20130628195551_create_users.rb	class CreateUsers 
+Help page	/home/fgka/dev/rails_projects/sample_app/spec/requests/static_pages_spec.rb	describe "Help page" do
+Home page	/home/fgka/dev/rails_projects/sample_app/spec/requests/static_pages_spec.rb	describe "Home page" do
+SampleApp	/home/fgka/dev/rails_projects/sample_app/config/application.rb	module SampleApp
+Static pages	/home/fgka/dev/rails_projects/sample_app/spec/requests/static_pages_spec.rb	describe "Static pages" do
+StaticPagesController	/home/fgka/dev/rails_projects/sample_app/app/controllers/static_pages_controller.rb	class StaticPagesController 
+StaticPagesHelper	/home/fgka/dev/rails_projects/sample_app/app/helpers/static_pages_helper.rb	module StaticPagesHelper
+User	/home/fgka/dev/rails_projects/sample_app/app/models/user.rb	class User 
+User pages	/home/fgka/dev/rails_projects/sample_app/spec/requests/user_pages_spec.rb	describe "User pages" do
+UsersController	/home/fgka/dev/rails_projects/sample_app/app/controllers/users_controller.rb	class UsersController 
+UsersHelper	/home/fgka/dev/rails_projects/sample_app/app/helpers/users_helper.rb	module UsersHelper
+VALID_EMAIL_REGEX	/home/fgka/dev/rails_projects/sample_app/app/models/user.rb		VALID_EMAIL_REGEX =
+about	/home/fgka/dev/rails_projects/sample_app/app/controllers/static_pages_controller.rb	  def about
+change	/home/fgka/dev/rails_projects/sample_app/db/migrate/20130628195551_create_users.rb	  def change
+change	/home/fgka/dev/rails_projects/sample_app/db/migrate/20130628203746_add_index_to_users_email.rb	  def change
+change	/home/fgka/dev/rails_projects/sample_app/db/migrate/20130628204630_add_password_digest_to_users.rb	  def change
+create	/home/fgka/dev/rails_projects/sample_app/app/controllers/users_controller.rb	  def create
+full_title	/home/fgka/dev/rails_projects/sample_app/app/helpers/application_helper.rb	  def full_title(page_title)
+full_title	/home/fgka/dev/rails_projects/sample_app/spec/helpers/application_helper_spec.rb	describe "full_title" do
+gravatar_for	/home/fgka/dev/rails_projects/sample_app/app/helpers/users_helper.rb	  def gravatar_for(user)
+help	/home/fgka/dev/rails_projects/sample_app/app/controllers/static_pages_controller.rb	  def help
+home	/home/fgka/dev/rails_projects/sample_app/app/controllers/static_pages_controller.rb	  def home
+new	/home/fgka/dev/rails_projects/sample_app/app/controllers/users_controller.rb	  def new
+profile page	/home/fgka/dev/rails_projects/sample_app/spec/requests/user_pages_spec.rb	describe "profile page" do
+return value of authenticate method	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "return value of authenticate method" do
+should be invalid	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	it "should be invalid" do
+should be valid	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	it "should be valid" do
+should create a user	/home/fgka/dev/rails_projects/sample_app/spec/requests/user_pages_spec.rb	it "should create a user" do
+should have the right links on the layout	/home/fgka/dev/rails_projects/sample_app/spec/requests/static_pages_spec.rb	it "should have the right links on the layout" do
+should include the base title	/home/fgka/dev/rails_projects/sample_app/spec/helpers/application_helper_spec.rb	it "should include the base title" do
+should include the page title	/home/fgka/dev/rails_projects/sample_app/spec/helpers/application_helper_spec.rb	it "should include the page title" do
+should not create a user	/home/fgka/dev/rails_projects/sample_app/spec/requests/user_pages_spec.rb	it "should not create a user" do
+should not include a bar for the home page	/home/fgka/dev/rails_projects/sample_app/spec/helpers/application_helper_spec.rb	it "should not include a bar for the home page" do
+show	/home/fgka/dev/rails_projects/sample_app/app/controllers/users_controller.rb	  def show
+signup	/home/fgka/dev/rails_projects/sample_app/spec/requests/user_pages_spec.rb	describe "signup" do
+signup page	/home/fgka/dev/rails_projects/sample_app/spec/requests/user_pages_spec.rb	describe "signup page" do
+when email address is already taken	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "when email address is already taken" do
+when email address is already taken	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "when email address is already taken" do
+when email format is invalid	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "when email format is invalid" do
+when email format is valid	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "when email format is valid" do
+when email is not present	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "when email is not present" do
+when name is not present	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "when name is not present" do
+when name is too long	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "when name is too long" do
+when password confirmation is nil	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "when password confirmation is nil" do
+when password doesn't match confirmation	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "when password doesn't match confirmation" do
+when password is not present	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "when password is not present" do
+with a password that's too short	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "with a password that's too short" do
+with invalid information	/home/fgka/dev/rails_projects/sample_app/spec/requests/user_pages_spec.rb	describe "with invalid information" do
+with invalid password	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "with invalid password" do
+with valid information	/home/fgka/dev/rails_projects/sample_app/spec/requests/user_pages_spec.rb	describe "with valid information" do
+with valid password	/home/fgka/dev/rails_projects/sample_app/spec/models/user_spec.rb	describe "with valid password" do
