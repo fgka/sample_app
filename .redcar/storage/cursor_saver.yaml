@@ -1,8 +1,5 @@
 --- 
 cursor_positions: 
-  - :path: app/controllers/application_controller.rb
-    :cursor_offset: 0
-    :timestamp: 2013-06-27 18:46:37 -03:00
   - :path: app/helpers/users_helper.rb
     :cursor_offset: 315
     :timestamp: 2013-07-11 16:59:44 -03:00
@@ -18,15 +15,9 @@ cursor_positions:
   - :path: spec/factories.rb
     :cursor_offset: 172
     :timestamp: 2013-07-11 16:48:34 -03:00
-  - :path: Gemfile
-    :cursor_offset: 789
-    :timestamp: 2013-07-11 16:45:52 -03:00
   - :path: spec/requests/user_pages_spec.rb
     :cursor_offset: 768
     :timestamp: 2013-07-11 17:09:27 -03:00
-  - :path: app/controllers/users_controller.rb
-    :cursor_offset: 206
-    :timestamp: 2013-07-11 17:25:01 -03:00
   - :path: app/views/users/show.html.erb
     :cursor_offset: 199
     :timestamp: 2013-07-11 17:26:26 -03:00
@@ -39,4 +30,37 @@ cursor_positions:
   - :path: app/assets/stylesheets/custom.css.scss
     :cursor_offset: 2189
     :timestamp: 2013-07-11 17:26:26 -03:00
+  - :path: db/migrate/20130711204144_add_remember_token_to_users.rb
+    :cursor_offset: 155
+    :timestamp: 2013-07-11 17:42:35 -03:00
+  - :path: spec/models/user_spec.rb
+    :cursor_offset: 588
+    :timestamp: 2013-07-11 17:46:27 -03:00
+  - :path: app/controllers/application_controller.rb
+    :cursor_offset: 200
+    :timestamp: 2013-07-11 17:40:39 -03:00
+  - :path: app/controllers/users_controller.rb
+    :cursor_offset: 0
+    :timestamp: 2013-07-11 17:26:26 -03:00
+  - :path: app/models/user.rb
+    :cursor_offset: 896
+    :timestamp: 2013-07-11 17:49:18 -03:00
+  - :path: app/views/layouts/_header.html.erb
+    :cursor_offset: 1075
+    :timestamp: 2013-07-11 17:57:32 -03:00
+  - :path: app/assets/javascripts/application.js
+    :cursor_offset: 643
+    :timestamp: 2013-07-11 17:55:19 -03:00
+  - :path: app/helpers/sessions_helper.rb
+    :cursor_offset: 246
+    :timestamp: 2013-07-11 17:59:04 -03:00
+  - :path: app/views/sessions/new.html.erb
+    :cursor_offset: 454
+    :timestamp: 2013-07-11 17:35:36 -03:00
+  - :path: app/controllers/sessions_controller.rb
+    :cursor_offset: 266
+    :timestamp: 2013-07-11 17:40:03 -03:00
+  - :path: Gemfile
+    :cursor_offset: 628
+    :timestamp: 2013-07-11 18:11:59 -03:00
 files_to_retain: 0
