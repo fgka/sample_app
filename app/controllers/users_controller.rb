@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!
 
-  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
+#  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
 
@@ -34,6 +35,16 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       render 'edit'
+    end
+  end
+
+  def resend_user_email
+    @user = current_user.company.users.find(params[:id])
+    @user.resend_confirmation_token
+
+    respond_to do |format|
+      flash[:notice] = t(:success_resend, scope: "user_management.index")
+      format.html { redirect_to :action => :index }
     end
   end
 
