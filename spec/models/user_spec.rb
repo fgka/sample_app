@@ -19,12 +19,12 @@ describe User do
 
   it { should respond_to(:name) }
   it { should respond_to(:email) }
-  it { should respond_to(:password_digest) }
+  it { should respond_to(:encrypted_password) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
-  it { should respond_to(:authenticate) }
+  it { should respond_to(:valid_password?) }
   it { should respond_to(:microposts) }
   it { should respond_to(:feed) }
   it { should respond_to(:relationships) }
@@ -121,11 +121,11 @@ describe User do
     let(:found_user) { User.find_by_email(@user.email) }
 
     describe "with valid password" do
-      it { should == found_user.authenticate(@user.password) }
+      it { found_user.valid_password? @user.password }
     end
 
     describe "with invalid password" do
-      let(:user_for_invalid_password) { found_user.authenticate("invalid") }
+      let(:user_for_invalid_password) { found_user.valid_password? "invalid" }
 
       it { should_not == user_for_invalid_password }
       specify { user_for_invalid_password.should be_false }
