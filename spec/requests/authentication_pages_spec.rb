@@ -132,7 +132,7 @@ describe "AuthenticationPages" do
 
       describe "submitting a PUT request to the Users#update action" do
         before { put user_path(wrong_user) }
-        specify { response.should redirect_to(root_path) }
+        specify { response.should redirect_to(new_user_session_path) }
       end
     end
 
@@ -144,7 +144,7 @@ describe "AuthenticationPages" do
 
       describe "submitting a DELETE request to the Users#destroy action" do
         before { delete user_path(user) }
-        specify { response.should redirect_to(root_path) }
+        specify { response.should redirect_to(new_user_session_path) }
       end
     end
   end
