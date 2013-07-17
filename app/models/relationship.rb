@@ -1,4 +1,5 @@
 class Relationship < ActiveRecord::Base
+  acts_as_tenant
 
   attr_accessible :followed_id
 
