@@ -153,7 +153,7 @@ describe "User pages" do
         let(:user) { User.find_by_email('user@example.com') }
 
         it { should have_selector('title', text: user.name) }
-        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+        it { should have_selector('div.alert', text: 'Welcome') }
         it { should have_link('Sign out') }
       end
     end
@@ -192,7 +192,7 @@ describe "User pages" do
 
       it { should have_selector('title', text: new_name) }
       it { should have_selector('div.alert.alert-success') }
-      it { should have_link('Sign out', href: signout_path) }
+      it { should have_link('Sign out', href: destroy_user_session_path) }
       specify { user.reload.name.should  == new_name }
       specify { user.reload.email.should == new_email }
     end

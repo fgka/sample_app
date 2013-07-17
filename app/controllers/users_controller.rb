@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, except: [:new, :create]
+  before_filter :authenticate_user!, except: [:new, :create, :show]
 
   #  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_filter :correct_user,   only: [:edit, :update]
@@ -81,7 +81,8 @@ class UsersController < ApplicationController
   def signed_in_user
     unless signed_in?
       store_location
-      redirect_to signin_url, notice: "Please sign in."
+      flash[:notice] = "Please sign in."
+      redirect_to signin_url
     end
   end
 
