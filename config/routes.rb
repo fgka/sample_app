@@ -2,7 +2,7 @@ SampleApp::Application.routes.draw do
 
   # Devise Routes
   match 'users/create' => 'users#create', via: 'post', as: 'create'
-  match 'users/(:id)' => 'users#update', via: 'put', as: 'update'
+  #match 'users/(:id)' => 'users#update', via: 'put', as: 'update'
   match 'users/resend_employee_email/(:id)' => 'users#resend_employee_email', via: 'get', as: 'resend_employee_email'
 
   devise_for :users, :controllers => {:registrations => 'registrations',
@@ -15,7 +15,7 @@ SampleApp::Application.routes.draw do
     end
   end
   
-  match 'users/(:id)/edit' => 'users#edit', via: 'get'
+  #match 'users/(:id)/edit' => 'users#edit', via: 'get'
 
   #Other resources
   resources :microposts, only: [:create, :destroy]

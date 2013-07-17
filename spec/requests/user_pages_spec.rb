@@ -165,7 +165,6 @@ describe "User pages" do
       sign_in user
       visit edit_user_path(user)
     end
-    before { visit edit_user_path(user) }
 
     describe "page" do
       it { should have_selector('h1',    text: "Update your profile") }
@@ -192,6 +191,7 @@ describe "User pages" do
 
       it { should have_selector('title', text: new_name) }
       it { should have_selector('div.alert.alert-success') }
+      it { should_not have_link('Sign in', href: new_user_session_path) }
       it { should have_link('Sign out', href: destroy_user_session_path) }
       specify { user.reload.name.should  == new_name }
       specify { user.reload.email.should == new_email }

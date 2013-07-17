@@ -1,14 +1,7 @@
 class UsersController < ApplicationController
-  prepend_before_filter :current_user, only: :show
   before_filter :authenticate_user!, except: [:new, :create, :show]
-
-  #  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
-
-  after_filter do
-#    puts response.body
-  end
 
   def new
     @user = User.new
@@ -35,8 +28,8 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(params[:user])
+      sign_in(@user, bypass: true)
       flash[:success] = "Profile updated"
-#      sign_in @user
       redirect_to @user
     else
       render 'edit'
@@ -44,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def resend_user_email
-    @user = current_user.company.users.find(params[:id])
+    @user = current_user.find(params[:id])
     @user.resend_confirmation_token
 
     respond_to do |format|
@@ -78,14 +71,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def signed_in_user
-    unless signed_in?
-      store_location
-      flash[:notice] = "Please sign in."
-      redirect_to signin_url
-    end
-  end
 
   def correct_user
     @user = User.find(params[:id])
