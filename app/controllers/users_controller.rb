@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  prepend_before_filter :current_user, only: :show
   before_filter :authenticate_user!, except: [:new, :create, :show]
 
   #  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
   def update
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated"
-      sign_in @user
+#      sign_in @user
       redirect_to @user
     else
       render 'edit'
