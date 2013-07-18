@@ -9,6 +9,7 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
+  require 'rspec/expectations'
   require 'rspec/autorun'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
@@ -37,9 +38,13 @@ Spork.prefork do
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
     config.infer_base_class_for_anonymous_controllers = false
-    
+
     #Setting up devise helpers to be used with specs
     config.include Devise::TestHelpers, :type => :controller
+
+    config.expect_with :rspec do |c|
+      c.syntax = [:should, :expect]  # default, enables both `should` and `expect`
+    end
   end
 end
 
