@@ -15,7 +15,6 @@ gem 'annotate', '2.5.0', group: :development
 group :development, :test do
   gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.11.0'
-  gem 'rspec-expectations', '2.11.3'
   gem 'guard-rspec', '1.2.1'
   gem 'guard-spork', github: 'guard/guard-spork'
   gem 'childprocess', '0.3.9'
@@ -38,6 +37,10 @@ group :test do
   gem 'factory_girl_rails', '4.1.0'
   gem 'cucumber-rails', '1.2.1', require: false
   gem 'database_cleaner', '0.7.0'
+  gem 'rspec-expectations', '2.11.3'
+  gem 'shoulda', '3.5.0'
+  gem 'shoulda-matchers', '2.2.0'
+  gem 'shoulda-context', '1.1.4'
 end
 
 group :production do
