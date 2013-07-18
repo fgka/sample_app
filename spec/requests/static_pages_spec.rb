@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe "Static pages" do
 
+  let(:tenant) { FactoryGirl.create(:tenant) }
+  before { set_tenant tenant }
+
   subject { page }
 
   shared_examples_for "all static pages" do
