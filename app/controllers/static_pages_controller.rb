@@ -1,4 +1,9 @@
 class StaticPagesController < ApplicationController
+  
+  skip_before_filter :authenticate_user!
+  
+  include StaticPagesHelper
+  
   def home
     if user_signed_in?
       @micropost  = current_user.microposts.build
