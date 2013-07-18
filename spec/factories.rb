@@ -1,12 +1,14 @@
-module FactoryGirl
-  module TenantHelper    
-    def self.current_tenant()
-      return Thread.current[:tenant_id]
+FactoryGirl.define do |binding|
+
+  class << binding
+    def current_tenant()
+      Thread.current[:tenant_id] ||= FactoryGirl.create(:tenant).id
+    end
+
+    def new_tenant()
+      Thread.current[:tenant_id] = FactoryGirl.create(:tenant).id
     end
   end
-end
-
-FactoryGirl.define do
 
   factory :tenant do
     sequence(:name) { |n| "Tenant #{n}"}
@@ -29,6 +31,6 @@ FactoryGirl.define do
   factory :micropost do
     content "Lorem ipsum"
     user
-    tenant_id FactoryGirl::TenantHelper::current_tenant
+    tenant_id binding.current_tenant
   end
 end
