@@ -27,6 +27,8 @@ describe Tenant do
   end
 
   describe "when name is not unique" do
-    expect { Tenant.create_new_tenant({name: @tenant.name}) }.to raise_error
+    it "should raise" do
+      expect { Tenant.create_new_tenant({name: @tenant.name}) }.to raise_error(ActiveRecord::RecordInvalid)
+    end
   end
 end
