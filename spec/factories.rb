@@ -5,14 +5,13 @@ FactoryGirl.define do |binding|
       Thread.current[:tenant_id] ||= FactoryGirl.create(:tenant).id
     end
 
-    def new_tenant()
-      Thread.current[:tenant_id] = FactoryGirl.create(:tenant).id
+    def set_tenant(tenant)
+      Thread.current[:tenant_id] = tenant.id
     end
   end
 
   factory :tenant do
     sequence(:name) { |n| "Tenant #{n}"}
-    sequence(:id) { |n| n }
     tenant_id nil
   end
 
@@ -22,7 +21,9 @@ FactoryGirl.define do |binding|
     password "foobar"
     password_confirmation "foobar"
     tenant_id nil
-
+        
+    before(:create) { binding.current_tenant }
+    
     factory :admin do
       admin true
     end
@@ -30,7 +31,9 @@ FactoryGirl.define do |binding|
 
   factory :micropost do
     content "Lorem ipsum"
-    user
     tenant_id binding.current_tenant
+    before(:create) do 
+      Rails.logger.info "BEFORE CREATE #{Tenant.all} / #{binding.current_tenant}"
+    end
   end
 end

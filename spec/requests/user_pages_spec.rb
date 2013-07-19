@@ -2,16 +2,17 @@ require 'spec_helper'
 
 describe "User pages" do
 
-  let(:tenant) { FactoryGirl.create(:tenant) }
-  before { set_tenant tenant }
-
   subject { page }
+
+  after(:each) do
+    Thread.current[:tenant_id] = nil
+  end
 
   describe "index" do
 
     let(:user) { FactoryGirl.create(:user) }
 
-    before(:each) do      
+    before(:each) do
       sign_in user
       visit users_path
     end
@@ -22,8 +23,7 @@ describe "User pages" do
     describe "pagination" do
 
       before(:all) do
-        set_tenant tenant
-        30.times { FactoryGirl.create(:user) } 
+        30.times { FactoryGirl.create(:user) }
       end
       after(:all)  { User.delete_all }
 
@@ -68,7 +68,10 @@ describe "User pages" do
     let!(:m1) { FactoryGirl.create(:micropost, user: user, content: "Foo") }
     let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
 
-    before { visit user_path(user) }
+    before do
+      sign_in user
+      visit user_path(user)
+    end
 
     it { should have_selector('h1',    text: user.name) }
     it { should have_selector('title', text: user.name) }
@@ -132,11 +135,14 @@ describe "User pages" do
 
   describe "signup" do
 
-    before { visit signup_path }
+    before do 
+      visit signup_path
+    end
 
     let(:submit) { "Create my account" }
 
     describe "with invalid information" do
+      before { select "#{Tenant.all.first.name}", from: "user_desired_tenant" }
       it "should not create a user" do
         expect { click_button submit }.not_to change(User, :count)
       end
@@ -146,6 +152,7 @@ describe "User pages" do
       before do
         fill_in "Name",         with: "Example User"
         fill_in "Email",        with: "user@example.com"
+        select "#{Tenant.all.first.name}", from: "user_desired_tenant"
         fill_in "Password",     with: "foobar"
         fill_in "Confirmation", with: "foobar"
       end

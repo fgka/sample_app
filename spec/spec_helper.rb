@@ -44,29 +44,8 @@ Spork.prefork do
       c.syntax = [:should, :expect]  # default, enables both `should` and `expect`
     end
 
-    config.before :suite do
-      DatabaseCleaner.strategy = :transaction
-      DatabaseCleaner.clean_with(:truncation)
-    end
-
     ## Reset test db before each test to avoid collisions
     config.use_transactional_fixtures = false
-
-    config.before type: :request do
-      DatabaseCleaner.strategy = :truncation
-    end
-
-    config.after type: :request do
-      DatabaseCleaner.strategy = :transaction
-    end
-
-    config.before do
-      DatabaseCleaner.start
-    end
-
-    config.after do
-      DatabaseCleaner.clean
-    end
   end
 end
 
