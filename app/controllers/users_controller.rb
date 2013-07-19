@@ -14,8 +14,6 @@ class UsersController < ApplicationController
   def create
     user = params[:user]
     desired_tenant = user[:desired_tenant]
-    tenant = Tenant.find(desired_tenant)
-    logger.info "DEBUG #{tenant.inspect}"
     set_current_tenant desired_tenant
     @user = User.new(user)
     if @user.save
