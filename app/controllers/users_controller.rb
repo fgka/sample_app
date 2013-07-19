@@ -8,10 +8,16 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    @tenants = Tenant.find(:all, order: 'name')
   end
 
   def create
-    @user = User.new(params[:user])
+    user = params[:user]
+    desired_tenant = user[:desired_tenant]
+    tenant = Tenant.find(desired_tenant)
+    logger.info "DEBUG #{tenant.inspect}"
+    set_current_tenant desired_tenant
+    @user = User.new(user)
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to the Sample App!"
