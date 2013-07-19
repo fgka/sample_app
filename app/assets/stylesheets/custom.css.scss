@@ -4,6 +4,10 @@
 
 $grayMediumLight: #eaeaea;
 
+$greenMediumDark: #00aaaa;
+
+$redMediumDark: #aa0000;
+
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -228,6 +232,25 @@ input {
 .content {
   display: block;
 }
+
+.tenant {
+  display: block;
+  font-size: 75%;
+  color: $grayLight;
+}
+
+.current_tenant, .no_current_tenant {
+  float: right;
+  height: 100%;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: $greenMediumDark;
+}
+
+.no_current_tenant {
+  color: $redMediumDark;
+}
+
 .timestamp {
   color: $grayLight;
 }
