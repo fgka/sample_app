@@ -12,6 +12,9 @@
 
     <%= f.label :email %>
     <%= f.text_field :email %>
+    
+    <%= f.label :tenant %>
+    <%= f.collection_select(:desired_tenant, @tenants, :id, :name) %>
 
     <%= f.label :password %>
     <%= f.password_field :password %>

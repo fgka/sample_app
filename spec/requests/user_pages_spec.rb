@@ -2,13 +2,16 @@ require 'spec_helper'
 
 describe "User pages" do
 
+  let(:tenant) { FactoryGirl.create(:tenant) }
+  before { set_tenant tenant }
+
   subject { page }
 
   describe "index" do
 
     let(:user) { FactoryGirl.create(:user) }
 
-    before(:each) do
+    before(:each) do      
       sign_in user
       visit users_path
     end
@@ -18,7 +21,10 @@ describe "User pages" do
 
     describe "pagination" do
 
-      before(:all) { 30.times { FactoryGirl.create(:user) } }
+      before(:all) do
+        set_tenant tenant
+        30.times { FactoryGirl.create(:user) } 
+      end
       after(:all)  { User.delete_all }
 
       it { should have_selector('div.pagination') }
@@ -29,7 +35,7 @@ describe "User pages" do
         end
       end
     end
-    
+
     describe "delete links" do
 
       it { should_not have_link('delete') }
