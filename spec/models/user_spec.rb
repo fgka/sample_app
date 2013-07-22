@@ -13,8 +13,10 @@ require 'spec_helper'
 
 describe User do
 
-  let(:tenant) { FactoryGirl.create(:tenant) }
-  before { @user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar") }
+  before do
+    Tenant.create_new_tenant(name: Faker::Name.name)
+    @user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
+  end
 
   subject { @user }
 
@@ -43,7 +45,6 @@ describe User do
 
   describe "with admin attribute set to 'true'" do
     before do
-      set_tenant tenant
       @user.save!
       @user.toggle!(:admin)
     end
@@ -88,7 +89,6 @@ describe User do
 
   describe "when email address is already taken" do
     before do
-      set_tenant tenant
       user_with_same_email = @user.dup
       user_with_same_email.save
     end
@@ -98,7 +98,6 @@ describe User do
 
   describe "when email address is already taken" do
     before do
-      set_tenant tenant
       user_with_same_email = @user.dup
       user_with_same_email.email = @user.email.upcase
       user_with_same_email.save
@@ -124,8 +123,7 @@ describe User do
 
   describe "return value of authenticate method" do
     before do
-      set_tenant tenant
-      @user.save
+      @user.save!
     end
     let(:found_user) { User.find_by_email(@user.email) }
 
@@ -148,8 +146,7 @@ describe User do
 
   describe "remember token" do
     before do
-      set_tenant tenant
-      @user.save
+      @user.save!
     end
     its(:remember_token) { should_not be_blank }
   end
@@ -157,8 +154,7 @@ describe User do
   describe "micropost associations" do
 
     before do
-      set_tenant tenant
-      @user.save
+      @user.save!
     end
     let!(:older_micropost) do
       FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)
@@ -168,12 +164,10 @@ describe User do
     end
 
     it "should have the right microposts in the right order" do
-      set_tenant tenant
       @user.microposts.should == [newer_micropost, older_micropost]
     end
 
     it "should destroy associated microposts" do
-      set_tenant tenant
       microposts = @user.microposts.dup
       @user.destroy
       microposts.should_not be_empty
@@ -189,7 +183,6 @@ describe User do
       let(:followed_user) { FactoryGirl.create(:user) }
 
       before do
-        set_tenant tenant
         @user.follow!(followed_user)
         3.times { followed_user.microposts.create!(content: "Lorem ipsum") }
       end
@@ -208,8 +201,7 @@ describe User do
   describe "following" do
     let(:other_user) { FactoryGirl.create(:user) }
     before do
-      set_tenant tenant
-      @user.save
+      @user.save!
       @user.follow!(other_user)
     end
 

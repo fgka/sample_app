@@ -3,11 +3,7 @@ require 'spec_helper'
 describe "User pages" do
 
   subject { page }
-
-  after(:each) do
-    Thread.current[:tenant_id] = nil
-  end
-
+  
   describe "index" do
 
     let(:user) { FactoryGirl.create(:user) }
@@ -77,6 +73,7 @@ describe "User pages" do
     it { should have_selector('title', text: user.name) }
 
     describe "microposts" do
+      Rails.logger.info "DEBUG"
       it { should have_content(m1.content) }
       it { should have_content(m2.content) }
       it { should have_content(user.microposts.count) }
@@ -84,7 +81,12 @@ describe "User pages" do
 
     describe "follow/unfollow buttons" do
       let(:other_user) { FactoryGirl.create(:user) }
-      before { sign_in user }
+      before do
+        Rails.logger.info "BEFORE EACH"
+        Rails.logger.info "BEFORE EACH #{Tenant.all} / #{current_tenant} / #{user}"
+        Rails.logger.info "BEFORE EACH"
+        sign_in user
+      end
 
       describe "following a user" do
         before { visit user_path(other_user) }
@@ -109,6 +111,9 @@ describe "User pages" do
 
       describe "unfollowing a user" do
         before do
+        Rails.logger.info "BEFORE EACH"
+        Rails.logger.info "BEFORE EACH #{Tenant.all} / #{current_tenant} / #{user}"
+        Rails.logger.info "BEFORE EACH"
           user.follow!(other_user)
           visit user_path(other_user)
         end

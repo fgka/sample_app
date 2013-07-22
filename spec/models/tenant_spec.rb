@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Tenant do
 
-  before { @tenant = Tenant.create_new_tenant({name: "Example Tenant"}) }
+  before { @tenant = FactoryGirl.create(:tenant) }
 
   subject { @tenant }
 

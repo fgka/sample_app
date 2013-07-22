@@ -2,7 +2,16 @@ FactoryGirl.define do |binding|
 
   class << binding
     def current_tenant()
-      Thread.current[:tenant_id] ||= FactoryGirl.create(:tenant).id
+      tenant_id = Thread.current[:tenant_id]
+      tenant = nil
+      if (!tenant_id.nil?)
+        tenant = Tenant.find_by_id(tenant_id)
+      end
+      if (tenant.nil?)
+        tenant_id = FactoryGirl.create(:tenant).id
+        Thread.current[:tenant_id] = tenant_id
+      end
+      tenant_id
     end
 
     def set_tenant(tenant)
@@ -32,8 +41,5 @@ FactoryGirl.define do |binding|
   factory :micropost do
     content "Lorem ipsum"
     tenant_id binding.current_tenant
-    before(:create) do 
-      Rails.logger.info "BEFORE CREATE #{Tenant.all} / #{binding.current_tenant}"
-    end
   end
 end

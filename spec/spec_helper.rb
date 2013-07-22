@@ -45,7 +45,7 @@ Spork.prefork do
     end
 
     ## Reset test db before each test to avoid collisions
-    config.use_transactional_fixtures = false
+    config.use_transactional_fixtures = true
   end
 end
 
