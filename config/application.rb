@@ -66,5 +66,7 @@ module SampleApp
     config.assets.version = '1.0'
     
     config.action_controller.include_all_helpers = true
+
+		config.assets.initialize_on_precompile = false
   end
 end
