@@ -1,20 +1,19 @@
 development:
     adapter: oracle_enhanced
-    username: rubydev
-    password: rubydev
-    database: localhost/orcl
+    username: RUBYDEV
+    password: RUBYDEV
 
 test:
     adapter: oracle_enhanced
-    username: rubytst
-    password: rubytst
-    database: localhost/orcl
+    username: RUBYTST
+    password: RUBYTST
 
 production:
     adapter: oracle_enhanced
-    username: rubyprd
-    password: rubyprd
-    database: localhost/orcl
+    username: RUBYPRD
+    password: RUBYPRD
 
 cucumber:
-  <<: *test
+    adapter: oracle_enhanced
+    username: RUBYTST
+    password: RUBYTST
