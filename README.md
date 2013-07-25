@@ -15,3 +15,17 @@ by [Michael Hartl](http://michaelhartl.com/).
 ## Versions:
  * Fedora 18/19 (last full update: 2013-07-22)
  * Oracle
+
+# Setup environment variables
+
+For Bash based shells just add this to your `.bash_profile`:
+
+	export ORACLE_BASE=/u01/app/oracle
+	export ORACLE_HOME=${ORACLE_BASE}/product/11.2.0/dbhome_1
+	export ORACLE_INSTANT_CLIENT=/usr/lib/oracle/11.2/client64/
+	export ORACLE_SID=orcl
+	export PATH=${PATH}:${ORACLE_HOME}/bin:/usr/sbin:${ORACLE_INSTANT_CLIENT}/bin
+	export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${ORACLE_HOME}/lib:${ORACLE_INSTANT_CLIENT}/lib
+	export CLASSPATH=${CLASSPATH}:${ORACLE_HOME}/JRE:${ORACLE_HOME}/jlib:${ORACLE_HOME}/rdbms/jlib:${ORACLE_INSTANT_CLIENT}/lib
+
+
