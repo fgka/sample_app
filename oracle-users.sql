@@ -1,10 +1,10 @@
 -- Do *NOT* forget to change all $DIRECTORY_DATA$ and $DIRECTORY_INDEX$
 --   by the actual directory, e.g.:
 -- FILE="oracle-users.sql"; sed -e 's/\$DIRECTORY_DATA\$/\/u01\/app\/oracle\/oradata\/orcl/g' -e 's/\$DIRECTORY_INDEX\$/\/u01\/app\/oracle\/oradata\/orcl/g' -e 's/"TEMPORARY"/"TEMP"/g' ${FILE} > ${FILE}.new; diff ${FILE} ${FILE}.new
--- echo "QUIT;" | sqlplus system/password @ ${FILE}.new
+-- echo "QUIT;" | sqlplus / as sysdba @ ${FILE}.new
 --
 -- To drop all users:
---   { for USER in dev tst prd; do echo "DROP USER ruby${USER}\" CASCADE;"; done } | sqlplus system/password;
+--   { for USER in dev tst prd; do echo "DROP USER ruby${USER} CASCADE;"; done } | sqlplus system/password;
 -- To drop all tables:
 --   { for TS in DEV TST PRD; do echo -e "DROP TABLESPACE \"SAMPLE_APP_${TS}\"\n/\nDROP TABLESPACE \"SAMPLE_APP_${TS}_INDEX\"\n/\n"; done } | sqlplus system/password
 --
@@ -46,7 +46,7 @@ GRANT CREATE SEQUENCE TO rubydev
 /
 REVOKE UNLIMITED TABLESPACE FROM rubydev
 /
-ALTER USER rubytst QUOTA 100M ON "SAMPLE_APP_TST"
+ALTER USER rubydev QUOTA 100M ON "SAMPLE_APP_DEV"
 /
 -- test
 -- user: rubytst
@@ -85,7 +85,7 @@ GRANT CREATE SEQUENCE TO rubytst
 /
 REVOKE UNLIMITED TABLESPACE FROM rubytst
 /
-ALTER USER rubydev QUOTA 100M ON "SAMPLE_APP_DEV"
+ALTER USER rubytst QUOTA 100M ON "SAMPLE_APP_TST"
 /
 -- production
 -- user: rubyprd
