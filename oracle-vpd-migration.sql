@@ -1,5 +1,6 @@
 --
 -- Now the VPD stuff
+-- Reference: http://docs.oracle.com/cd/B28359_01/network.111/b28531/vpd.htm#BABCAIJH
 -- This goes into a raw SQL migration
 --
 --
