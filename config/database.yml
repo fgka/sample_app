@@ -1,19 +1,19 @@
 development:
     adapter: oracle_enhanced
-    username: RUBYDEV
-    password: RUBYDEV
+    username: rubydev
+    password: rubydev
 
 test:
     adapter: oracle_enhanced
-    username: RUBYTST
-    password: RUBYTST
+    username: rubytst
+    password: rubytst
 
 production:
     adapter: oracle_enhanced
-    username: RUBYPRD
-    password: RUBYPRD
+    username: rubyprd
+    password: rubyprd
 
 cucumber:
     adapter: oracle_enhanced
-    username: RUBYTST
-    password: RUBYTST
+    username: rubytst
+    password: rubytst
