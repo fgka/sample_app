@@ -5,6 +5,5 @@ class CreateTenants < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :tenants, :tenant_id
   end
 end
