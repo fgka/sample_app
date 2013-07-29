@@ -13,7 +13,7 @@ require 'spec_helper'
 
 describe User do
 
-  before { @user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar") }
+  before { @user = User.new(name: 'Example User', email: 'user@example.com', password: 'foobar', password_confirmation: 'foobar') }
 
   subject { @user }
 
@@ -47,23 +47,23 @@ describe User do
     it { should be_admin }
   end
 
-  describe "when name is not present" do
-    before { @user.name = " " }
+  describe 'when name is not present' do
+    before { @user.name = ' ' }
     it { should_not be_valid }
   end
 
-  describe "when email is not present" do
-    before { @user.email = " " }
+  describe 'when email is not present' do
+    before { @user.email = ' ' }
     it { should_not be_valid }
   end
 
-  describe "when name is too long" do
-    before { @user.name = "a" * 51 }
+  describe 'when name is too long' do
+    before { @user.name = 'a' * 51 }
     it { should_not be_valid }
   end
 
-  describe "when email format is invalid" do
-    it "should be invalid" do
+  describe 'when email format is invalid' do
+    it 'should be invalid' do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo. foo@bar_baz.com foo@bar+baz.com]
       addresses.each do |invalid_address|
         @user.email = invalid_address
@@ -72,8 +72,8 @@ describe User do
     end
   end
 
-  describe "when email format is valid" do
-    it "should be valid" do
+  describe 'when email format is valid' do
+    it 'should be valid' do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
         @user.email = valid_address
@@ -82,7 +82,7 @@ describe User do
     end
   end
 
-  describe "when email address is already taken" do
+  describe 'when email address is already taken' do
     before do
       user_with_same_email = @user.dup
       user_with_same_email.save
@@ -91,7 +91,7 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "when email address is already taken" do
+  describe 'when email address is already taken' do
     before do
       user_with_same_email = @user.dup
       user_with_same_email.email = @user.email.upcase
@@ -101,31 +101,31 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "when password is not present" do
-    before { @user.password = @user.password_confirmation = " " }
+  describe 'when password is not present' do
+    before { @user.password = @user.password_confirmation = ' ' }
     it { should_not be_valid }
   end
 
   describe "when password doesn't match confirmation" do
-    before { @user.password_confirmation = "mismatch" }
+    before { @user.password_confirmation = 'mismatch' }
     it { should_not be_valid }
   end
 
-  describe "when password confirmation is nil" do
+  describe 'when password confirmation is nil' do
     before { @user.password_confirmation = nil }
     it { should_not be_valid }
   end
 
-  describe "return value of authenticate method" do
+  describe 'return value of authenticate method' do
     before { @user.save }
     let(:found_user) { User.find_by_email(@user.email) }
 
-    describe "with valid password" do
+    describe 'with valid password' do
       it { found_user.valid_password? @user.password }
     end
 
-    describe "with invalid password" do
-      let(:user_for_invalid_password) { found_user.valid_password? "invalid" }
+    describe 'with invalid password' do
+      let(:user_for_invalid_password) { found_user.valid_password? 'invalid' }
 
       it { should_not == user_for_invalid_password }
       specify { user_for_invalid_password.should be_false }
@@ -133,16 +133,16 @@ describe User do
   end
 
   describe "with a password that's too short" do
-    before { @user.password = @user.password_confirmation = "a" * 5 }
+    before { @user.password = @user.password_confirmation = 'a' * 5 }
     it { should be_invalid }
   end
 
-  describe "remember token" do
+  describe 'remember token' do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
   end
 
-  describe "micropost associations" do
+  describe 'micropost associations' do
 
     before { @user.save }
     let!(:older_micropost) do
@@ -152,11 +152,11 @@ describe User do
       FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago)
     end
 
-    it "should have the right microposts in the right order" do
+    it 'should have the right microposts in the right order' do
       @user.microposts.should == [newer_micropost, older_micropost]
     end
 
-    it "should destroy associated microposts" do
+    it 'should destroy associated microposts' do
       microposts = @user.microposts.dup
       @user.destroy
       microposts.should_not be_empty
@@ -165,7 +165,7 @@ describe User do
       end
     end
 
-    describe "status" do
+    describe 'status' do
       let(:unfollowed_post) do
         FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
       end
@@ -173,7 +173,7 @@ describe User do
 
       before do
         @user.follow!(followed_user)
-        3.times { followed_user.microposts.create!(content: "Lorem ipsum") }
+        3.times { followed_user.microposts.create!(content: 'Lorem ipsum') }
       end
 
       its(:feed) { should include(newer_micropost) }
@@ -187,7 +187,7 @@ describe User do
     end
   end
 
-  describe "following" do
+  describe 'following' do
     let(:other_user) { FactoryGirl.create(:user) }
     before do
       @user.save
@@ -197,12 +197,12 @@ describe User do
     it { should be_following(other_user) }
     its(:followed_users) { should include(other_user) }
 
-    describe "followed user" do
+    describe 'followed user' do
       subject { other_user }
       its(:followers) { should include(@user) }
     end
 
-    describe "and unfollowing" do
+    describe 'and unfollowing' do
       before { @user.unfollow!(other_user) }
 
       it { should_not be_following(other_user) }

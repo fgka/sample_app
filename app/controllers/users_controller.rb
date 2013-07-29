@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = 'Welcome to the Sample App!'
       redirect_to @user
     else
       render 'new'
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   def update
     if @user.update_attributes(params[:user])
       sign_in(@user, bypass: true)
-      flash[:success] = "Profile updated"
+      flash[:success] = 'Profile updated'
       redirect_to @user
     else
       render 'edit'
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @user.resend_confirmation_token
 
     respond_to do |format|
-      flash[:notice] = t(:success_resend, scope: "user_management.index")
+      flash[:notice] = t(:success_resend, scope: 'user_management.index')
       format.html { redirect_to :action => :index }
     end
   end
@@ -52,19 +52,19 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User destroyed."
+    flash[:success] = 'User destroyed.'
     redirect_to users_url
   end
 
   def following
-    @title = "Following"
+    @title = 'Following'
     @user = User.find(params[:id])
     @users = @user.followed_users.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
+    @title = 'Followers'
     @user = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'

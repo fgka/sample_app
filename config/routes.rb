@@ -1,3 +1,4 @@
+# encoding: utf-8
 SampleApp::Application.routes.draw do
 
   # Devise Routes
@@ -8,13 +9,13 @@ SampleApp::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => 'registrations',
                                       :sessions => 'sessions',
                                       :confirmations => 'confirmations',
-                                      :passwords => 'passwords'}                                     
+                                      :passwords => 'passwords'}
   resources :users do
     member do
       get :following, :followers
     end
   end
-  
+
   #match 'users/(:id)/edit' => 'users#edit', via: 'get'
 
   #Other resources
