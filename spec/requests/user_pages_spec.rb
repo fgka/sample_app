@@ -29,7 +29,7 @@ describe 'User pages' do
         end
       end
     end
-    
+
     describe 'delete links' do
 
       it { should_not have_link('delete') }
@@ -131,6 +131,7 @@ describe 'User pages' do
     let(:submit) { 'Create my account' }
 
     describe 'with invalid information' do
+       before { select "#{Tenant.all.first.name}", from: "user_desired_tenant" }
       it 'should not create a user' do
         expect { click_button submit }.not_to change(User, :count)
       end
@@ -140,6 +141,7 @@ describe 'User pages' do
       before do
         fill_in 'Name',         with: 'Example User'
         fill_in 'Email',        with: 'user@example.com'
+        select "#{Tenant.all.first.name}", from: "user_desired_tenant"
         fill_in 'Password',     with: 'foobar'
         fill_in 'Confirmation', with: 'foobar'
       end
