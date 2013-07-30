@@ -102,7 +102,10 @@ describe 'AuthenticationPages' do
         end
 
         describe 'submitting to the destroy action' do
-          before { delete micropost_path(FactoryGirl.create(:micropost)) }
+          before do
+            micropost = FactoryGirl.create(:micropost, user: user)
+            delete micropost_path(micropost)
+          end
           specify { response.should redirect_to(new_user_session_path) }
         end
       end
