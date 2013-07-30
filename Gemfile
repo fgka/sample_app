@@ -18,12 +18,12 @@ gem 'activerecord-oracle_enhanced-adapter', '1.4.2'
 gem 'annotate', '2.5.0', group: :development
 
 group :development, :test do
-  gem 'guard-rubocop', '0.2.1'
   gem 'rspec-rails', '2.11.0'
+  gem 'spork', '0.9.2'
   gem 'guard-rspec', '1.2.1'
   gem 'guard-spork', :github => 'guard/guard-spork'
+  gem 'guard-rubocop', '0.2.1'
   gem 'childprocess', '0.3.9'
-  gem 'spork', '0.9.2'
 end
 
 group :assets do
@@ -34,7 +34,7 @@ end
 
 group :test do
   gem 'capybara', '1.1.2'
-  gem 'rb-inotify', '~> 0.9'
+  gem 'rb-inotify', '0.9'
   gem 'libnotify', '0.5.9'
   gem 'factory_girl_rails', '4.1.0', :require => false
   gem 'cucumber-rails', '1.2.1', :require => false

@@ -259,7 +259,7 @@ DEPENDENCIES
   jquery-rails (= 2.0.2)
   libnotify (= 0.5.9)
   rails (= 3.2.13)
-  rb-inotify (~> 0.9)
+  rb-inotify (= 0.9)
   rspec-expectations (= 2.11.3)
   rspec-rails (= 2.11.0)
   ruby-oci8 (= 2.1.5)
