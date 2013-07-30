@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'spork'
+require 'factory_girl_rails'
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
@@ -34,11 +35,13 @@ Spork.prefork do
     # config.use_transactional_fixtures = true
     config.use_transactional_fixtures = false
 
-    config.before :each do
-      DatabaseCleaner.strategy = :truncation
-      DatabaseCleaner.start
-    end
+# Do NOT uncomment # They are incompatible with Oracle DB adapter. REALLY!!!
+# Do NOT uncomment #    config.before :each do
+# Do NOT uncomment #      DatabaseCleaner.strategy = :truncation
+# Do NOT uncomment #      DatabaseCleaner.start
+# Do NOT uncomment #    end
 
+    # Absolutelly necessary for Oracle test DB to work
     config.after do
       DatabaseCleaner.clean
     end
