@@ -49,6 +49,11 @@ END;
 -- INSERT INTO my_table VALUES ( 4321, 'Secret tenant 2', 2 );
 -- SELECT * FROM my_table;
 
+-- To remove the policy:
+--  DBMS_RLS.DROP_POLICY (
+--   --object_schema   => 'rubydev', -- if not specified the current is used
+--   object_name     => 'my_table',
+--   policy_name     => 'my_table_policy');
 BEGIN
  DBMS_RLS.ADD_POLICY (
 --  object_schema    => 'rubydev', -- if not specified the current is used
