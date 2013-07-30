@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, except: [:new, :create, :show]
+  before_filter :authenticate_tenant!, except: [:new, :create, :show]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
+  before_filter :set_tenants, only: [:new, :create]
 
   def new
     @user = User.new
@@ -79,5 +81,9 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to(root_path) unless current_user.admin?
+  end
+
+  def set_tenants
+    @tenants = Tenant.find(:all, order: 'name')
   end
 end

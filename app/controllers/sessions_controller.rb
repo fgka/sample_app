@@ -8,7 +8,7 @@ class SessionsController < Devise::SessionsController
     self.resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
 
-    if !resource.nil? #&& resource.sign_in_count == 1
+    if !resource.nil?
       redirect_to self.resource
     else
       render 'new'
