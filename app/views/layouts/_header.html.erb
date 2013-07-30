@@ -26,6 +26,11 @@
           <% end %>
         </ul>
       </nav>
+      <% if current_tenant.nil? %>
+        <span class="no_current_tenant pull-right">No tenant</span>
+      <% else %>
+        <span class="current_tenant pull-right"><%= current_tenant.name %></span>
+      <% end %>
     </div>
   </div>
 </header>

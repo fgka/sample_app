@@ -7,4 +7,11 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
+
+  def current_tenant
+    tenant = Tenant.find_by_id(Thread.current[:tenant_id])
+  end
+
+  def set_current_tenant!(tenant)
+  end
 end

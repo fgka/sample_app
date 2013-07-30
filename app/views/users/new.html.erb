@@ -5,21 +5,24 @@
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
 
-    <%= render 'shared/error_messages', object: f.object %>
+      <%= render 'shared/error_messages', object: f.object %>
 
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
 
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
 
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+      <%= f.label :tenant %>
+      <%= f.collection_select(:desired_tenant, @tenants, :id, :name) %>
 
-    <%= f.label :password_confirmation, "Confirmation" %>
-    <%= f.password_field :password_confirmation %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
 
-    <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>
