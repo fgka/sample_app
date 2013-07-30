@@ -36,7 +36,7 @@ group :test do
   gem 'capybara', '1.1.2'
   gem 'rb-inotify', '~> 0.9'
   gem 'libnotify', '0.5.9'
-  gem 'factory_girl_rails', '4.1.0'
+  gem 'factory_girl_rails', '4.1.0', :require => false
   gem 'cucumber-rails', '1.2.1', :require => false
   gem 'database_cleaner', '0.7.0'
   gem 'rspec-expectations', '2.11.3'
