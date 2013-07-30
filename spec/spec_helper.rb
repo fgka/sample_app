@@ -34,16 +34,7 @@ Spork.prefork do
     # examples within a transaction, remove the following line or assign false
     # instead of true.
     # config.use_transactional_fixtures = true
-    #config.use_transactional_fixtures = true
-
-    config.before :each do
-      DatabaseCleaner.strategy = :deletion
-      DatabaseCleaner.start
-    end
-
-    config.after do
-      DatabaseCleaner.clean
-    end
+    config.use_transactional_fixtures = true
 
     # If true, the base class of anonymous controllers will be inferred
     # automatically. This will be the default behavior in future versions of

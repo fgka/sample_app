@@ -10,7 +10,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    user = params[:user]
+    desired_tenant = user[:desired_tenant]
+    set_current_tenant desired_tenant
+    @user = User.new(user)
     if @user.save
       sign_in @user
       flash[:success] = 'Welcome to the Sample App!'
