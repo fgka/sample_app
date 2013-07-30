@@ -3,11 +3,13 @@
 -- Reference: http://docs.oracle.com/cd/B28359_01/network.111/b28531/vpd.htm#BABCAIJH
 -- This goes into a raw SQL migration
 --
--- To remove the package:
---  DROP PACKAGE tenant_ctx_pkg;
 --
+-- To remove the context:
+--  DROP CONTEXT tenant_ctx;
 CREATE OR REPLACE CONTEXT tenant_ctx USING tenant_ctx_pkg
 /
+-- To remove the package:
+--  DROP PACKAGE tenant_ctx_pkg;
 CREATE OR REPLACE PACKAGE tenant_ctx_pkg IS
  PROCEDURE set_tenant_id(tenant_id IN NUMBER);
  PROCEDURE clear_tenant_id;
@@ -27,6 +29,8 @@ CREATE OR REPLACE PACKAGE BODY tenant_ctx_pkg IS
 END;
 /
 
+-- To remove the function:
+--  DROP FUNCTION get_ctx_tenant;
 CREATE OR REPLACE FUNCTION get_ctx_tenant(
   schema_p   IN VARCHAR2,
   table_p    IN VARCHAR2)
