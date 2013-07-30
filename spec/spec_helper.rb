@@ -11,6 +11,7 @@ Spork.prefork do
   require File.expand_path('../../config/environment', __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
+  require 'database_cleaner'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -33,15 +34,13 @@ Spork.prefork do
     # examples within a transaction, remove the following line or assign false
     # instead of true.
     # config.use_transactional_fixtures = true
-    config.use_transactional_fixtures = false
+    #config.use_transactional_fixtures = true
 
-# Do NOT uncomment # They are incompatible with Oracle DB adapter. REALLY!!!
-# Do NOT uncomment #    config.before :each do
-# Do NOT uncomment #      DatabaseCleaner.strategy = :truncation
-# Do NOT uncomment #      DatabaseCleaner.start
-# Do NOT uncomment #    end
+    config.before :each do
+      DatabaseCleaner.strategy = :deletion
+      DatabaseCleaner.start
+    end
 
-    # Absolutelly necessary for Oracle test DB to work
     config.after do
       DatabaseCleaner.clean
     end
