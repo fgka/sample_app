@@ -10,4 +10,8 @@ class Tenant < ActiveRecord::Base
 
     return tenant
   end
+
+  def self.tenant_signup(user, tenant, other = nil)
+    StartupJob.queue_startup(tenant, user, other)
+  end
 end

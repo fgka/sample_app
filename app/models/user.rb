@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -17,12 +6,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
     :recoverable, :rememberable, :validatable
 
-  has_and_belongs_to_many :tenants
+  attr_accessor :desired_tenant
+  acts_as_account
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :name, :password, :password_confirmation, :remember_me
-  #attr_accessible :email, :name, :password, :password_confirmation
-  #has_secure_password
   has_many :microposts, dependent: :destroy
   has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed

@@ -13,12 +13,16 @@ RSpec::Matchers.define :have_error_message do |message|
 end
 
 def sign_in(user)
-  begin 
-    find_link('Sign out').click    
+  begin
+    find_link('Sign out').click
   rescue
   end
   visit new_user_session_path
   fill_in 'user_email', with: user.email
   fill_in 'user_password', with: user.password
   click_button 'Sign in'
+end
+
+def set_tenant(tenant)
+  Thread.current[:tenant_id] = tenant.id
 end

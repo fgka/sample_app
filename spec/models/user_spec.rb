@@ -1,19 +1,11 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 require 'spec_helper'
 
 describe User do
 
-  before { @user = User.new(name: 'Example User', email: 'user@example.com', password: 'foobar', password_confirmation: 'foobar') }
+  before do
+    set_tenant Tenant.create_new_tenant(name: Faker::Name.name)
+    @user = User.new(name: 'Example User', email: 'user@example.com', password: 'foobar', password_confirmation: 'foobar')
+  end
 
   subject { @user }
 
@@ -34,6 +26,7 @@ describe User do
   it { should respond_to(:following?) }
   it { should respond_to(:follow!) }
   it { should respond_to(:unfollow!) }
+  it { should respond_to(:desired_tenant) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -138,7 +131,7 @@ describe User do
   end
 
   describe 'remember token' do
-    before { @user.save }
+    before { @user.save! }
     its(:remember_token) { should_not be_blank }
   end
 
