@@ -15,7 +15,10 @@ gem 'devise', '2.1.2'
 gem 'ruby-oci8', '2.1.5'
 gem 'activerecord-oracle_enhanced-adapter', '1.4.2'
 
-gem 'annotate', '2.5.0', group: :development
+group :development do
+  gem 'annotate', '2.5.0'
+  gem 'pry-rails', '0.3.2'
+end
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
