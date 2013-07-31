@@ -2,12 +2,15 @@ require 'spec_helper'
 
 describe Relationship do
 
+  let(:tenant) { FactoryGirl.create(:tenant) }
   let(:follower) { FactoryGirl.create(:user) }
   let(:followed) { FactoryGirl.create(:user) }
 
   let(:relationship) { follower.relationships.build(followed_id: followed.id) }
 
   subject { relationship }
+
+  before { set_tenant tenant }
 
   it { should be_valid }
 

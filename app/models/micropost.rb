@@ -1,8 +1,8 @@
 class Micropost < ActiveRecord::Base
+  acts_as_tenant_based
+
   attr_accessible :content
   belongs_to :user
-
-  belongs_to  :tenant
 
   validates :content, presence: true, length: { maximum: 140 }
   validates :user_id, presence: true

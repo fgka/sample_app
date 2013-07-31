@@ -11,7 +11,7 @@ module OracleVPD
         belongs_to :tenant
         validates_presence_of :tenant_id
 
-        defaut_scope lambda { where("#{table_name}.tenant_id = ?", Thread.current[:tenant_id]) }
+        default_scope lambda { where("#{table_name}.tenant_id = ?", Thread.current[:tenant_id]) }
 
         before_validation(on: :create) do |obj|
           obj.tenant_id = Thread.current[:tenant_id]
