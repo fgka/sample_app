@@ -1,7 +1,7 @@
-TENANT_AMOUNT = 10
-USER_PER_TENANT = 50
-USERS_WITH_MICROPOST_AMOUNT = 6
-MICROPOST_AMOUNT = 50
+TENANT_AMOUNT = 2
+USER_PER_TENANT = 5
+USERS_WITH_MICROPOST_AMOUNT = 2
+MICROPOST_AMOUNT = 12
 
 namespace :db do
   desc "Fill database with sample data"
@@ -15,7 +15,7 @@ end
 
 def make_tenants
   TENANT_AMOUNT.times do |n|
-    name = "tenant-#{n+1}"
+    name = "Tenant-#{n+1}"
     Tenant.create_new_tenant({name: name})
   end
   puts "#{TENANT_AMOUNT} Tenants were created."
