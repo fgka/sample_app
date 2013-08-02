@@ -6,22 +6,29 @@ class AddOracleContext < ActiveRecord::Migration
 
     execute <<-SQL
       CREATE OR REPLACE PACKAGE tenant_ctx_pkg IS
-        PROCEDURE set_tenant_id(tenant_id IN NUMBER);
-        PROCEDURE clear_tenant_id;
+        FUNCTION set_tenant_id(tenant_id IN NUMBER) RETURN NUMBER;
+        FUNCTION clear_tenant_id RETURN NUMBER;
         END;
     SQL
 
     execute <<-SQL
       CREATE OR REPLACE PACKAGE BODY tenant_ctx_pkg IS
-        PROCEDURE set_tenant_id(
-          tenant_id IN NUMBER
-        ) IS
+        ret_tenant_id NUMBER := NULL;
+        FUNCTION set_tenant_id(tenant_id IN NUMBER)
+        RETURN NUMBER
+        IS
         BEGIN
           DBMS_SESSION.SET_CONTEXT('tenant_ctx', 'tenant_id', tenant_id);
+          SELECT SYS_CONTEXT('tenant_ctx', 'tenant_id') INTO ret_tenant_id FROM dual;
+          RETURN ret_tenant_id;
         END set_tenant_id;
-        PROCEDURE clear_tenant_id IS
+        FUNCTION clear_tenant_id
+        RETURN NUMBER
+        IS
         BEGIN
+          SELECT SYS_CONTEXT('tenant_ctx', 'tenant_id') INTO ret_tenant_id FROM dual;
           DBMS_SESSION.SET_CONTEXT('tenant_ctx', 'tenant_id', NULL);
+          RETURN ret_tenant_id;
         END clear_tenant_id;
       END;
     SQL
