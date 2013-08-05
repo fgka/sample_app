@@ -1,7 +1,7 @@
 class MicropostsController < ApplicationController
   before_filter :authenticate_user!, only: [:create, :destroy]
   before_filter :correct_user,   only: :destroy
-  
+
   def index
   end
 
@@ -23,8 +23,8 @@ class MicropostsController < ApplicationController
 
   private
 
-    def correct_user
-      @micropost = current_user.microposts.find_by_id(params[:id])
-      redirect_to root_url unless current_user?(@micropost.user)
-    end
+  def correct_user
+    @micropost = current_user.microposts.find_by_id(params[:id])
+    redirect_to root_url unless current_user?(@micropost.user)
+  end
 end

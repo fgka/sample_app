@@ -8,13 +8,13 @@ SampleApp::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => 'registrations',
                                       :sessions => 'sessions',
                                       :confirmations => 'confirmations',
-                                      :passwords => 'passwords'}                                     
+                                      :passwords => 'passwords'}
   resources :users do
     member do
       get :following, :followers
     end
   end
-  
+
   #match 'users/(:id)/edit' => 'users#edit', via: 'get'
 
   #Other resources
@@ -28,5 +28,4 @@ SampleApp::Application.routes.draw do
   match '/help', to: 'static_pages#help'
   match '/about', to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
-
 end
