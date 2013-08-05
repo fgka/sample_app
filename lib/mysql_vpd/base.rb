@@ -1,4 +1,4 @@
-module OracleVPD
+module MysqlVPD
   module Base
     def self.included(base)
       base.extend ClassMethods
@@ -19,12 +19,12 @@ module OracleVPD
         end
 
         before_save do |obj|
-          raise ::OracleVPD::Control::InvalidTenantAccess unless obj.tenant_id == Thread.current[:tenant_id]
+          raise ::MysqlVPD::Control::InvalidTenantAccess unless obj.tenant_id == Thread.current[:tenant_id]
           true
         end
 
         before_destroy do |obj|
-          raise ::OracleVPD::Control::InvalidTenantAccess unless obj.tenant_id == Thread.current[:tenant_id]
+          raise ::MysqlVPD::Control::InvalidTenantAccess unless obj.tenant_id == Thread.current[:tenant_id]
           true
         end
       end

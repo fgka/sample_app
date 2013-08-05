@@ -1,4 +1,4 @@
-module OracleVPD
+module MysqlVPD
   module Control
     class InvalidTenantAccess < SecurityError; end
 

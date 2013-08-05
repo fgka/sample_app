@@ -12,8 +12,7 @@ gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'devise', '2.1.2'
-gem 'ruby-oci8', '2.1.5'
-gem 'activerecord-oracle_enhanced-adapter', '1.4.2'
+gem 'mysql2', '0.3.13'
 
 group :development do
   gem 'annotate', '2.5.0'

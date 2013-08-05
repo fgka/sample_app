@@ -1,19 +1,36 @@
 development:
-    adapter: oracle_enhanced
-    username: rubydev
-    password: rubydev
+  adapter: mysql2
+  encoding: utf8
+  database: sampleapp_dev
+  username: rubydev
+  password: rubydev
+  host: 127.0.0.1
+  port: 3306
 
 test:
-    adapter: oracle_enhanced
-    username: rubytst
-    password: rubytst
+  adapter: mysql2
+  encoding: utf8
+  database: sampleapp_tst
+  username: rubytst
+  password: rubytst
+  host: 127.0.0.1
+  port: 3306
 
 production:
-    adapter: oracle_enhanced
-    username: rubyprd
-    password: rubyprd
+  adapter: mysql2
+  encoding: utf8
+  database: sampleapp_prd
+  username: rubyprd
+  password: rubyprd
+  host: 127.0.0.1
+  port: 3306
 
 cucumber:
-    adapter: oracle_enhanced
-    username: rubytst
-    password: rubytst
+  adapter: mysql2
+  encoding: utf8
+  database: sampleapp_tst
+  username: rubytst
+  password: rubytst
+  host: 127.0.0.1
+  port: 3306
+

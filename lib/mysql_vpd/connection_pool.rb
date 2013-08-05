@@ -5,8 +5,8 @@ module ActiveRecord::ConnectionAdapters
 
     def new_checkout
       conn = old_checkout
-      debug "CONN CHECKOUT: after (getting a connection from the pool)"
-      debug list_packages(conn)
+#      debug "CONN CHECKOUT: after (getting a connection from the pool)"
+#      debug list_packages(conn)
       #add_tenancy_to_connection conn
       conn
     end
@@ -16,7 +16,7 @@ module ActiveRecord::ConnectionAdapters
     alias_method :old_checkin, :checkin
 
     def new_checkin(conn)
-      debug "CONN CHECKIN: before (releasing a connection back to the pool)"
+#      debug "CONN CHECKIN: before (releasing a connection back to the pool)"
       #remove_tenancy_from_connection conn
       old_checkin conn
     end
