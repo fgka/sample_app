@@ -11,25 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130731001751) do
+ActiveRecord::Schema.define(:version => 20130805204452) do
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
-    t.integer  "user_id",    :precision => 38, :scale => 0
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
-    t.integer  "tenant_id",  :precision => 38, :scale => 0
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "tenant_id"
   end
 
   add_index "microposts", ["tenant_id"], :name => "index_microposts_on_tenant_id"
   add_index "microposts", ["user_id", "created_at"], :name => "i_mic_use_id_cre_at"
 
   create_table "relationships", :force => true do |t|
-    t.integer  "follower_id", :precision => 38, :scale => 0
-    t.integer  "followed_id", :precision => 38, :scale => 0
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
-    t.integer  "tenant_id",   :precision => 38, :scale => 0
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "tenant_id"
   end
 
   add_index "relationships", ["followed_id"], :name => "i_relationships_followed_id"
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(:version => 20130731001751) do
   end
 
   create_table "tenants_users", :id => false, :force => true do |t|
-    t.integer "tenant_id", :precision => 38, :scale => 0
-    t.integer "user_id",   :precision => 38, :scale => 0
+    t.integer "tenant_id"
+    t.integer "user_id"
   end
 
   add_index "tenants_users", ["tenant_id"], :name => "i_tenants_users_tenant_id"
@@ -64,15 +64,15 @@ ActiveRecord::Schema.define(:version => 20130731001751) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",                                                               :null => false
-    t.datetime "updated_at",                                                               :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "remember_token"
-    t.boolean  "admin",                                                 :default => false
-    t.string   "encrypted_password",                                    :default => "",    :null => false
+    t.boolean  "admin",                  :default => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :precision => 38, :scale => 0, :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
