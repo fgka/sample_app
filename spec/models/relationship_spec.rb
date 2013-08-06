@@ -15,8 +15,6 @@ describe Relationship do
   it { should be_valid }
 
   describe 'accessible attributes' do
-    it { should respond_to(:tenant) }
-    it { should_not allow_mass_assignment_of(:tenant_id) }
     it 'should not allow access to follower_id' do
       expect do
         Relationship.new(follower_id: follower.id)
