@@ -1,6 +1,4 @@
 class Micropost < ActiveRecord::Base
-  acts_as_tenant_based
-
   attr_accessible :content
   belongs_to :user
 

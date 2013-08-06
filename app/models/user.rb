@@ -2,16 +2,11 @@ class User < ActiveRecord::Base
 
   acts_as_account
 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  # :registerable,
   devise :database_authenticatable,
     :recoverable, :rememberable, :validatable
 
   attr_accessor :desired_tenant
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :name, :password, :password_confirmation, :remember_me, :desired_tenant
   has_many :microposts, dependent: :destroy
   has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
