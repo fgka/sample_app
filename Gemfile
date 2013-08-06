@@ -45,4 +45,5 @@ group :test do
   gem 'shoulda', '3.5.0'
   gem 'shoulda-matchers', '2.2.0'
   gem 'shoulda-context', '1.1.4'
+  gem 'test-unit', '2.5.5'
 end
