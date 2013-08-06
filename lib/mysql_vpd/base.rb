@@ -5,30 +5,6 @@ module MysqlVPD
     end
 
     module ClassMethods
-
-      def acts_as_tenant_based
-        attr_protected :tenant_id
-        belongs_to :tenant
-        validates_presence_of :tenant_id
-
-        default_scope lambda { where("#{table_name}.tenant_id = ?", Thread.current[:tenant_id]) }
-
-        before_validation(on: :create) do |obj|
-          obj.tenant_id = Thread.current[:tenant_id]
-          true
-        end
-
-        before_save do |obj|
-          raise ::MysqlVPD::Control::InvalidTenantAccess unless obj.tenant_id == Thread.current[:tenant_id]
-          true
-        end
-
-        before_destroy do |obj|
-          raise ::MysqlVPD::Control::InvalidTenantAccess unless obj.tenant_id == Thread.current[:tenant_id]
-          true
-        end
-      end
-
       def acts_as_account
         has_and_belongs_to_many :tenants
 
