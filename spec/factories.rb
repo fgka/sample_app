@@ -38,6 +38,6 @@ FactoryGirl.define do |binding|
 
   factory :micropost do
     content "Lorem ipsum"
-    tenant_id binding.current_tenant
+    before(:create) { binding.current_tenant }
   end
 end
