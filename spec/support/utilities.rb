@@ -1,4 +1,5 @@
 include ApplicationHelper
+include MysqlVPD::TenantHelper
 
 def valid_signin(user)
   fill_in 'user_email', with: user.email
@@ -23,6 +24,3 @@ def sign_in(user)
   click_button 'Sign in'
 end
 
-def set_tenant(tenant)
-  Thread.current[:tenant_id] = tenant.id
-end

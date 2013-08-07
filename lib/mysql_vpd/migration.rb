@@ -17,7 +17,7 @@ module MysqlVPD
 
     def drop_view(name)
       execute <<-SQL
-    DROP VIEW IF EXISTS #{name};
+      DROP VIEW IF EXISTS #{name};
       SQL
     end
 
@@ -56,20 +56,20 @@ module MysqlVPD
 
     def drop_trigger(name)
       execute <<-SQL
-    DROP TRIGGER IF EXISTS #{name}
-    SQL
+      DROP TRIGGER IF EXISTS #{name}
+      SQL
     end
 
     def get_sql_column_setting_function_based_trigger(trigger_name, operation, table, column, function_name)
       result = <<-SQL
-    CREATE TRIGGER #{trigger_name}
-    BEFORE #{operation}
-    ON #{table}
-    FOR EACH ROW
-    BEGIN
-      SET NEW.#{column} = (SELECT #{function_name}());
-    END
-    SQL
+      CREATE TRIGGER #{trigger_name}
+      BEFORE #{operation}
+      ON #{table}
+      FOR EACH ROW
+      BEGIN
+        SET NEW.#{column} = (SELECT #{function_name}());
+      END
+      SQL
     end
   end
 end

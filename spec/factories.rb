@@ -1,21 +1,17 @@
 FactoryGirl.define do |binding|
 
   class << binding
-    def current_tenant()
-      tenant_id = Thread.current[:tenant_id]
-      tenant = nil
-      if (!tenant_id.nil?)
-        tenant = Tenant.find_by_id(tenant_id)
-      end
-      if (tenant.nil?)
-        tenant_id = FactoryGirl.create(:tenant).id
-        Thread.current[:tenant_id] = tenant_id
-      end
-      tenant_id
-    end
 
-    def set_tenant(tenant)
-      Thread.current[:tenant_id] = tenant.id
+    include MysqlVPD::TenantHelper
+
+    def bind_current_tenant()
+      tenant = current_tenant
+      debug "#{tenant.inspect}"
+      if tenant.nil?
+        tenant = FactoryGirl.create(:tenant)
+        set_tenant tenant
+      end
+      tenant.id
     end
   end
 
@@ -29,7 +25,7 @@ FactoryGirl.define do |binding|
     password "foobar"
     password_confirmation "foobar"
 
-    before(:create) { binding.current_tenant }
+    before(:create) { binding.bind_current_tenant }
 
     factory :admin do
       admin true
@@ -38,6 +34,6 @@ FactoryGirl.define do |binding|
 
   factory :micropost do
     content "Lorem ipsum"
-    before(:create) { binding.current_tenant }
+    before(:create) { binding.bind_current_tenant }
   end
 end

@@ -1,7 +1,12 @@
 module MysqlVPD
   module Base
+
     def self.included(base)
-      base.extend ClassMethods
+      base.send :extend, ClassMethods
+      base.send :include, InstanceMethods
+    end
+
+    module InstanceMethods
     end
 
     module ClassMethods
@@ -30,22 +35,8 @@ module MysqlVPD
         end
       end
 
-      def current_tenant
-        return Tenant.find(Thread.current[:tenant_id])
-      end
-
-      def current_tenant_id
-        return Thread.current[:tenant_id]
-      end
-
       def set_current_tenant(tenant)
-        case tenant
-        when Tenant then tenant_id = tenant.id
-        when Integer then tenant_id = tenant
-        else raise ArgumentError
-        end
-
-        Thread.current[:tenant_id] = tenant_id
+        set_tenant tenant
       end
     end
   end
