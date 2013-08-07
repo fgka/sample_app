@@ -3,10 +3,6 @@ module MysqlVPD
 
     def self.included(base)
       base.send :extend, ClassMethods
-      base.send :include, InstanceMethods
-    end
-
-    module InstanceMethods
     end
 
     module ClassMethods

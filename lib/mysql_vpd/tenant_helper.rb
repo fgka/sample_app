@@ -2,25 +2,22 @@ module MysqlVPD
   module TenantHelper
     def self.included(base)
       base.send :extend, ClassMethods
-      base.send :include, InstanceMethods
     end
 
-    module InstanceMethods
-      def set_tenant(tenant)
-        self.class.set_tenant tenant
-      end
+    def set_tenant(tenant)
+      self.class.set_tenant tenant
+    end
 
-      def current_tenant
-        self.class.current_tenant
-      end
+    def current_tenant
+      self.class.current_tenant
+    end
 
-      def current_tenant_id
-        self.class.current_tenant_id
-      end
+    def current_tenant_id
+      self.class.current_tenant_id
+    end
 
-      def debug msg
-        self.class.debug msg
-      end
+    def debug msg
+      self.class.debug msg
     end
 
     module ClassMethods
@@ -48,6 +45,7 @@ module MysqlVPD
       end
 
       def debug msg
+        return
         tenant_id = current_tenant_id
         log_msg = "HELPER[Tenant: '#{tenant_id}'] #{msg}"
         Rails.logger.info log_msg
