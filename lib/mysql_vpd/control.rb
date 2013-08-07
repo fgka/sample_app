@@ -34,6 +34,7 @@ module MysqlVPD
     def initiate_tenant(tenant)
       set_tenant tenant.id
     end
+
     module ClassMethods
     end
   end

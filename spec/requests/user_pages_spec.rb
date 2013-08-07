@@ -129,7 +129,10 @@ describe 'User pages' do
 
   describe 'signup' do
 
-    before { visit signup_path }
+    before do
+      3.times { Tenant.create_new_tenant(name: Faker::Name.name) }
+      visit signup_path
+    end
 
     let(:submit) { 'Create my account' }
 

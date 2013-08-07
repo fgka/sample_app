@@ -38,6 +38,7 @@ module MysqlVPD
         case tenant
         when Tenant then tenant_id = tenant.id
         when Integer then tenant_id = tenant
+        when String then tenant_id = tenant.to_i
         else raise ArgumentError
         end
 
@@ -45,7 +46,6 @@ module MysqlVPD
       end
 
       def log_debug msg
-        return
         tenant_id = current_tenant_id
         log_msg = "HELPER[Tenant: '#{tenant_id}'] #{msg}"
         Rails.logger.info log_msg
@@ -57,7 +57,6 @@ module MysqlVPD
       def set_tenant_and_call_listeners(tenant_id)
         result = Thread.current[:tenant_id] = tenant_id
         listeners = tenant_listeners
-        log_debug "LISTENERS: #{listeners.to_s}"
         unless listeners.nil?
           listeners.each do |key, block|
             block.call
