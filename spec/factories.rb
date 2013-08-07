@@ -6,7 +6,6 @@ FactoryGirl.define do |binding|
 
     def bind_current_tenant()
       tenant = current_tenant
-      debug "#{tenant.inspect}"
       if tenant.nil?
         tenant = FactoryGirl.create(:tenant)
         set_tenant tenant

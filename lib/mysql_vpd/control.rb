@@ -27,7 +27,7 @@ module MysqlVPD
         tenant_id = 0  if tenant_id.nil?   # an impossible tenant_id
       end
 
-      set_tenant tenant.id
+      set_tenant tenant_id
       true    # before filter ok to proceed
     end
 

@@ -16,8 +16,8 @@ module MysqlVPD
       self.class.current_tenant_id
     end
 
-    def debug msg
-      self.class.debug msg
+    def log_debug msg
+      self.class.log_debug msg
     end
 
     module ClassMethods
@@ -44,7 +44,7 @@ module MysqlVPD
         set_tenant_and_call_listeners tenant_id
       end
 
-      def debug msg
+      def log_debug msg
         return
         tenant_id = current_tenant_id
         log_msg = "HELPER[Tenant: '#{tenant_id}'] #{msg}"
@@ -57,7 +57,7 @@ module MysqlVPD
       def set_tenant_and_call_listeners(tenant_id)
         result = Thread.current[:tenant_id] = tenant_id
         listeners = tenant_listeners
-        debug "LISTENERS: #{listeners.to_s}"
+        log_debug "LISTENERS: #{listeners.to_s}"
         unless listeners.nil?
           listeners.each do |key, block|
             block.call

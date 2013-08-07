@@ -7,7 +7,6 @@ module ActiveRecord::ConnectionAdapters
 
     def new_checkout
       conn = old_checkout
-      debug "CHECKOUT: after (getting a connection from the pool)"
       set_tenant_listener_lambda(conn)
       set_connection_tenant conn
       conn
@@ -18,7 +17,6 @@ module ActiveRecord::ConnectionAdapters
     alias_method :old_checkin, :checkin
 
     def new_checkin(conn)
-      debug "CHECKIN: before (releasing a connection back to the pool)"
       unset_tenant_listener_lambda conn
       old_checkin conn
     end
@@ -48,7 +46,6 @@ module ActiveRecord::ConnectionAdapters
       unless tenant_id.is_a? Numeric
         tenant_id = "NULL"
       end
-      debug "Setting tenant: #{tenant_id}"
       send_tenant_id(conn, tenant_id)
     end
 
