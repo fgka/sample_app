@@ -34,7 +34,9 @@ GRANT
     CREATE VIEW, SHOW VIEW, ALTER ROUTINE, CREATE ROUTINE, EXECUTE, TRIGGER
         ON sampleapp_prd.* TO 'rubyprd'@'localhost' IDENTIFIED BY 'rubyprd';
 FLUSH PRIVILEGES;
+--
 -- Just checking
+--
 USE mysql;
-SELECT db, user FROM db where db LIKE 'sampleapp_%';
+SELECT db, user FROM db WHERE db LIKE 'sampleapp_%';
 SELECT user, host FROM user WHERE user LIKE 'ruby%';
