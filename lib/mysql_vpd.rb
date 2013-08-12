@@ -4,6 +4,7 @@ require 'mysql_vpd/base'
 require 'mysql_vpd/control'
 require 'mysql_vpd/migration'
 require 'mysql_vpd/connection_pool'
+require 'mysql_vpd/abstract_mysql_adapter'
 
 Rails.configuration.to_prepare do
   ActiveRecord::Base.send(:include, MysqlVPD::TenantHelper)
