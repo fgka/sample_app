@@ -12,6 +12,9 @@ set_trace_func proc { |event, file, line, id, binding, classname|
   end
 }
 
+msg = ">>> #{__FILE__}:#{__LINE__} >>> #{}"
+puts msg
+
 tenant_a = Tenant.create_new_tenant(name: "Tenant_#{Time.now.to_i}")
 Tenant.set_tenant tenant_a
 user_a = User.create!(name: "User #{Time.now.to_i}", email: "user.#{Time.now.to_i}@example.com", password: 'password', password_confirmation: 'password')
@@ -53,5 +56,69 @@ end
 
 pk "tenants"
 pk "microposts"
+result = txt.to_s.match(/select.+(`.+`)\.`id` AS `id`.+(from[^,]+) where/i).captures
 
-result = txt.to_s.match(/select.+(`.+`)\.`id` AS `id`.+(from[^,]+) where/).captures
+# Returns an array of +Column+ objects for the table specified by +table_name+.
+def cols(table_name, name = nil)#:nodoc:
+  sql = "SHOW FULL FIELDS FROM #{ActiveRecord::Base.connection.quote_table_name(table_name)}"
+  ActiveRecord::Base.connection.execute_and_free(sql, 'SCHEMA') do |result|
+    ActiveRecord::Base.connection.each_hash(result).map do |field|
+      puts "#{field[:Field]} : #{field[:Default]} : #{field[:Type]} : #{field[:Null] == "YES"} : #{field[:Collation]}"
+    end
+  end
+end
+
+def create_view_sql_str(table_or_view)
+  result = nil
+  sql = "SHOW CREATE TABLE #{ActiveRecord::Base.connection.quote_table_name(table_or_view)}"
+  ActiveRecord::Base.connection.execute_and_free(sql, 'SCHEMA') do |sql_result|
+    create_view_sql = ActiveRecord::Base.connection.each_hash(sql_result).first[1].to_s
+    if !create_view_sql.empty?
+      result = create_view_sql
+      break
+    end
+  end
+  result
+end
+
+create_stmt = create_view_sql_str 'owned_books'
+create_stmt_with_join = 'CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `owned_books` AS select `t`.`id` AS `id`,`b`.`title` AS `title`,`b`.`author` AS `author`,`b`.`cover` AS `cover`,`b`.`description` AS `descrition` from (`books` `b` join `tenants` `t`)$$'
+create_stmt_without_join = 'CREATE ALGORITHM=UNDEFINED DEFINER=`rubydev`@`localhost` SQL SECURITY DEFINER VIEW `microposts` AS select `mt`.`id` AS `id`,`mt`.`content` AS `content`,`mt`.`user_id` AS `user_id`,`mt`.`created_at` AS `created_at`,`mt`.`updated_at` AS `updated_at` from `mt_microposts` `mt` where (`mt`.`tenant_id` = (select `get_ctx_tenant`()))$$'
+
+def single_table_view? (create_stmt)
+  result = false
+  match_create_algorithm = create_stmt.match(/CREATE ALGORITHM.+from(.+)/i)
+  if !match_create_algorithm.nil?
+    from_part = match_create_algorithm.captures[0].split(/where.*/i)[0]
+    result = !from_part.downcase.include?('join')
+  end
+  result
+end
+
+single_table_view? create_stmt_with_join # false
+single_table_view? create_stmt_without_join # true
+
+
+def actual_table_and_alias(create_view_stmt)
+  from_match = create_view_stmt.match(/FROM[[:blank:]].(.*).[[:blank:]]WHERE/i)
+  result = from_match.captures[0].split(/`[[:space:]]+`/)
+  if result.size == 0 || result.size > 2
+    fail
+  end
+  if result.size == 1
+    result[1] = result[0]
+  end
+  result
+end
+
+create_stmt_without_alias = 'CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `owned_books` AS select `books`.`title` AS `title`,`books`.`author` AS `author`,`books`.`cover` AS `cover`,`books`.`description` AS `descrition` from `books` where (`books`.`owner` = (select `get_ctx_tenant`()))$$'
+
+actual_table_and_alias create_stmt_without_alias # ["books", "books"]
+actual_table_and_alias create_stmt_without_join # ["mt_microposts", "mt"]
+
+cols "tenants"
+cols "microposts"
+
+single_table_view? "tenants" # false
+single_table_view? "microposts" # true
+
