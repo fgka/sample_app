@@ -41,7 +41,7 @@ module ActiveRecord::ConnectionAdapters
       end
     end
 
-    def set_connection_tenant conn
+    def set_connection_tenant(conn)
       tenant_id = current_tenant_id
       unless tenant_id.is_a? Numeric
         tenant_id = "NULL"

@@ -16,7 +16,7 @@ module MysqlVPD
       self.class.current_tenant_id
     end
 
-    def log_debug msg
+    def log_debug(msg)
       self.class.log_debug msg
     end
 
@@ -41,11 +41,10 @@ module MysqlVPD
         when String then tenant_id = tenant.to_i
         else raise ArgumentError
         end
-
         set_tenant_and_call_listeners tenant_id
       end
 
-      def log_debug msg
+      def log_debug(msg)
         tenant_id = current_tenant_id
         log_msg = "HELPER[Tenant: '#{tenant_id}'] #{msg}"
         Rails.logger.info log_msg
