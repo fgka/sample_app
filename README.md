@@ -28,4 +28,7 @@ Do **NOT** use the following `rake` command:
 
 `rake db:drop db:create db:migrate db:populate RAILS_ENV=development`
 
+# Running tests:
+
+`rake db:drop db:create db:migrate RAILS_ENV=test; rspec spec/`
 
