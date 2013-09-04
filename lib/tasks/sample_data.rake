@@ -1,7 +1,11 @@
+require 'mysql_vpd/tenant_helper'
+
 TENANT_AMOUNT = 2
 USER_PER_TENANT = 5
 USERS_WITH_MICROPOST_AMOUNT = 2
 MICROPOST_AMOUNT = 12
+
+include MysqlVPD::TenantHelper
 
 namespace :db do
   desc "Fill database with sample data"
@@ -43,7 +47,7 @@ end
 def make_microposts
   tenants = Tenant.all
   tenants.each do |tenant|
-    Thread.current[:tenant_id] = tenant.id
+    set_tenant(tenant)
     users = tenant.users(limit: USERS_WITH_MICROPOST_AMOUNT)
     MICROPOST_AMOUNT.times do
       content = Faker::Lorem.sentence(5)
@@ -56,6 +60,7 @@ end
 def make_relationships
   tenants = Tenant.all
   tenants.each do |tenant|
+    set_tenant(tenant)
     users = tenant.users
     user = users.first
     max_followed = USER_PER_TENANT / 2
