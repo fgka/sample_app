@@ -19,7 +19,7 @@ module MysqlVPD
         end
         session[:tenant_id] = tenant_id
       else
-        tenant_id = 0  if tenant_id.nil?
+        tenant_id = 0 if tenant_id.nil?
       end
       set_tenant tenant_id
       true
