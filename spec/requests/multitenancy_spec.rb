@@ -45,7 +45,6 @@ describe 'Multitenant Microposts' do
 
       describe 'microposts' do
         it { should_not have_content(mB.content) }
-        it { should_not have_content(userB.microposts.count) }
       end
     end
   end
