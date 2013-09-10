@@ -7,7 +7,7 @@ module MysqlVPD
 
     module ClassMethods
       def acts_as_account
-        has_and_belongs_to_many :tenants
+        has_and_belongs_to_many :tenant_table
 
         after_create do |new_user|
           tenant = Tenant.find(Thread.current[:tenant_id])

@@ -14,3 +14,16 @@ Rails.configuration.to_prepare do
   ActionController::Base.send(:include, MysqlVPD::Control)
   ActiveRecord::Migration.send(:include, MysqlVPD::Migration)
 end
+
+module MysqlVPD
+
+  mattr_accessor :account_tables
+  @@account_tables = [ :users ]
+
+  mattr_accessor :tenant_table
+  @@tenant_table = :tenants
+
+  def self.setup
+    yield self
+  end
+end
