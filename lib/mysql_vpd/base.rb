@@ -7,32 +7,49 @@ module MysqlVPD
 
     module ClassMethods
       def acts_as_account
-        has_and_belongs_to_many :tenant_table
 
-        after_create do |new_user|
-          tenant = Tenant.find(Thread.current[:tenant_id])
-          unless tenant.users.include?(new_user)
-            tenant.users << new_user
-          end
+        after_create do |model|
+          add_model_to_current_tenant(model)
+          true
         end
 
-        before_destroy do |old_user|
-          old_user.tenants.clear
+        before_destroy do |model|
+          remove_model(model)
           true
         end
       end
 
       def acts_as_tenant
-        has_and_belongs_to_many :users
+        has_and_belongs_to_many :accounts
 
         before_destroy do |old_tenant|
-          old_tenant.users.clear
+          old_tenant.accounts.clear
           true
         end
       end
 
       def set_current_tenant(tenant)
         set_tenant tenant
+      end
+
+      private
+
+      def add_model_to_tenant(model)
+        tenant = current_tenant
+        new_account = Account.create_by_model(model)
+        unless tenant.accounts.include?(new_account)
+          new_account.create!
+          tenant.accounts << new_account
+        end
+      end
+
+      def remove_model(model)
+        account = Account.retrieve_by_model(model)
+        unless account.nil? do
+          account.tenants.clear
+          account.destroy!
+        end
+        end
       end
     end
   end
