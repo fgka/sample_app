@@ -9,14 +9,18 @@ module MysqlVPD
       def acts_as_account
 
         after_create do |model|
-          add_model_to_current_tenant(model)
+          self.class.add_model_to_current_tenant(model)
           true
         end
 
         before_destroy do |model|
-          remove_model(model)
+          self.class.remove_model(model)
           true
         end
+      end
+
+      def defines_account
+
       end
 
       def acts_as_tenant
@@ -32,13 +36,11 @@ module MysqlVPD
         set_tenant tenant
       end
 
-      private
-
-      def add_model_to_tenant(model)
+      def add_model_to_current_tenant(model)
         tenant = current_tenant
         new_account = Account.create_by_model(model)
         unless tenant.accounts.include?(new_account)
-          new_account.create!
+          new_account.save!
           tenant.accounts << new_account
         end
       end
