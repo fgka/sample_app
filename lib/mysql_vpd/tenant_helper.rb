@@ -41,7 +41,7 @@ module MysqlVPD
         when String then tenant_id = tenant.to_i
         else raise ArgumentError
         end
-        set_tenant_and_call_listeners tenant_id
+        set_tenant_and_call_listeners(tenant_id)
       end
 
       def log_debug(msg)
