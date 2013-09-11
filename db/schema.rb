@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130811200746) do
+ActiveRecord::Schema.define(:version => 20130911182134) do
+
+  create_table "accounts", :force => true do |t|
+    t.integer  "model_id"
+    t.string   "model_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "accounts", ["model_id", "model_type"], :name => "index_accounts_on_model_id_and_model_type"
+
+  create_table "accounts_tenants", :id => false, :force => true do |t|
+    t.integer "account_id"
+    t.integer "tenant_id"
+  end
+
+  add_index "accounts_tenants", ["account_id"], :name => "index_accounts_tenants_on_account_id"
+  add_index "accounts_tenants", ["tenant_id"], :name => "index_accounts_tenants_on_tenant_id"
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
@@ -64,14 +81,6 @@ ActiveRecord::Schema.define(:version => 20130811200746) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  create_table "tenants_users", :id => false, :force => true do |t|
-    t.integer "tenant_id"
-    t.integer "user_id"
-  end
-
-  add_index "tenants_users", ["tenant_id"], :name => "index_tenants_users_on_tenant_id"
-  add_index "tenants_users", ["user_id"], :name => "index_tenants_users_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
